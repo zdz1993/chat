@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Chat example</title>
+    <style type="text/css">
+    #form {
+        width: 600px;
+        display: block;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    
+    .text {
+        width: 490px;
+        height: 200px;
+        border: 5px solid yellow;
+        overflow: auto;
+    }
+    
+    #msg {
+        width: 400px;
+        height: 100px;
+        border: 5px solid green;
+        float: left;
+    }
+    
+    .sub-container {
+        overflow: hidden;
+    }
+    
+    .sub-button {
+        width: 86px;
+        height: 114px;
+        background: red;
+        text-align: center;
+        font-size: 18px;
+        float: left;
+        border: 5px solid green;
+    }
+    
+    .title {
+        background: pink;
+        height: 50px;
+        width: 490px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 18px;
+        border: 5px solid pink;
+    }
+    
+    .chat-left {
+        float: left;
+    }
+    
+    .chat-right {
+        width: 100px;
+        height: 384px;
+        background: yellow;
+        float: right;
+    }
+    
+    .enter-title {
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        width: 100px;
+    }
+    
+    .enter-title-h {
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        width: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <div class="chat-left">
+            <div class="title">聊天室</div>
+            <div class="text"></div>
+            <div class="sub-container">
+                <textarea size="50" id="msg"></textarea>
+                <input type="submit" value="发送" class="sub-button">
+            </div>
+        </div>
+        <div class="chat-right">
+            <div class="who-enter">
+                <div class="enter-title">在线详情</div>
+            </div>
+        </div>
+    </form>
+    <script>
+    var connection
+    window.addEventListener("load", function() {
+        var nickname = prompt("Choose a nickname");
+        var oText = document.getElementsByClassName("text")[0];
+        var oMsg = document.getElementById("msg");
+        var oForm = document.getElementById("form");
+        var oWhoEnter = document.getElementsByClassName("who-enter")[0];
+
+        if (nickname) {
+            connection = new WebSocket("ws://172.17.70.36:8080")
+            connection.onopen = function() {
+                connection.send(nickname)
+                oForm.onsubmit = function(event) {
+                    if (oMsg.value)
+                        connection.send(oMsg.value)
+                    oMsg.value = ""
+                    event.preventDefault()
+                }
+                oMsg.onkeydown = function(event) {
+
+                    if (event.keyCode == 13) {
+                        connection.send(oMsg.value);
+                        oMsg.value = "";
+                        event.preventDefault()
+                    }
+                }
+
+            }
+            connection.onclose = function(nick) {
+                var oDom = document.getElementsByClassName("enter-title-h");
+                for (var i = 0; i < oDom.length; i++) {
+                    if (oDom[i].textContent == nick) {
+                        oWhoEnter.removeChild(oDom[i])
+                    }
+                }
+
+            }
+            connection.onerror = function() {
+                console.error("Connection error");
+            }
+            connection.onmessage = function(event) {
+                var div = document.createElement("div");
+                var data = JSON.parse(event.data);
+
+                if (data.type == "content") {
+                    div.textContent = data.str;
+                    oText.appendChild(div);
+                } else {
+                    var oDom = document.getElementsByClassName("enter-title-h");
+                    var oChild = document.getElementsByClassName("who-enter")[0];
+                    for (var i = 0; i < oDom.length; i++) {
+                        oChild.removeChild(oDom[i])
+                    }
+
+                    data.str.map(function(item, index) {
+                        var odiv = document.createElement("div");
+                        odiv.className = 'enter-title-h';
+                        odiv.textContent = item + '在线';
+                        oWhoEnter.appendChild(odiv);
+                    })
+
+                }
+
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
