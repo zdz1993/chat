@@ -16,7 +16,7 @@ var server = ws.createServer(function(connection) {
     })
 
     connection.on("close", function() {
-        broadcast(connection.nickname)
+        broadcast(JSON.stringify(connection.nickname));
     })
 
 })
