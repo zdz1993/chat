@@ -12,7 +12,7 @@ var server = ws.createServer(function(connection) {
             nicknameArray.push(connection.nickname);
             broadcast(JSON.stringify({ str: nicknameArray, type: "detail" }));
         } else
-            broadcast(JSON.stringify({ str: "[" + connection.nickname + "] " + str, type: "content" }));
+            broadcast(JSON.stringify({ str: "[" + connection.nickname + "]" + str, type: "content" }));
     })
 
     connection.on("close", function() {
