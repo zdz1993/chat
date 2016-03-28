@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Chat example</title>
     <link rel="stylesheet" type="text/css" href="../css/socket.css">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
 </head>
 
 <body>
@@ -15,8 +16,26 @@
             </div>
             <div class="text"></div>
             <div class="sub-container">
-                <input size="50" id="msg">
+                <p contenteditable="true" size="50" id="msg"></p>
                 <input type="submit" value="发送" class="sub-button">
+                <span class="expression">
+                    <i class="expression-radius"></i>
+                    <i class="reg"></i>
+                    <ul class="express-list">
+                        <li class="express-extent">
+                            <img width="40px" height="40px" src="http://image48.360doc.com/DownloadImg/2011/12/2310/20235268_2.jpg">
+                        </li>
+                        <li class="express-extent">
+                            <img width="40px" height="40px" src="http://image48.360doc.com/DownloadImg/2011/12/2310/20235268_2.jpg">
+                        </li>
+                        <li class="express-extent">
+                            <img width="40px" height="40px" src="http://image48.360doc.com/DownloadImg/2011/12/2310/20235268_2.jpg">
+                        </li>
+                        <li class="express-extent">
+                            <img width="40px" height="40px" src="http://image48.360doc.com/DownloadImg/2011/12/2310/20235268_2.jpg">
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
         <div class="chat-right">
@@ -25,7 +44,8 @@
             </div>
         </div>
     </form>
-<script type="text/javascript" src="../js/fesocket.js"></script>
+    <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/fesocket.js"></script>
 </body>
 
 </html>

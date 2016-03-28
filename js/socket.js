@@ -16,6 +16,12 @@ var server = ws.createServer(function(connection) {
     })
 
     connection.on("close", function() {
+        nicknameArray.map(function(item,index){
+            if(item == connection.nickname){
+                
+            }
+
+        })
         broadcast(JSON.stringify(connection.nickname));
     })
 
