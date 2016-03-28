@@ -48,8 +48,8 @@
                  div.textContent = data.str;
                  div.className = "content-text";
                  div.innerHTML = "<div class='person'>"+data.str.split(']')[0].split('[')[1]+":</div><div class='personsay'>"+data.str.split(']')[1]+"</div>";
-                 console.log(data.str.split(']')[1]);
                  oText.appendChild(div);
+                 oText.scrollTop = oText.scrollHeight;
 
              } else {
                  var oDom = document.getElementsByClassName("enter-title-h");
