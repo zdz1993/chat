@@ -9,7 +9,7 @@
 
      if (nickname) {
          oWhoTitle.innerHTML = nickname;
-         connection = new WebSocket("ws://172.17.70.36:8080")
+         connection = new WebSocket("ws://120.76.129.15:8080")
          connection.onopen = function() {
              connection.send(nickname)
              oForm.onsubmit = function(event) {
