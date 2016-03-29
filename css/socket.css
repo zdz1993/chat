@@ -22,7 +22,8 @@ body {
     border-radius: 10px;
     position: relative;
     background-position: 0px 0px;
-    animation: animatedBackground 10s linear infinite;
+    background-repeat: repeat-x repeat-y;
+    animation: animatedBackground 40s linear infinite;
 }
 
 .who-title {
@@ -147,7 +148,7 @@ body {
 
 .express-list {
     position: absolute;
-    top: -95px;
+    top: -266px;
     left: -40px;
     width: 180px;
     overflow: hidden;
