@@ -21,9 +21,7 @@ body {
     overflow: hidden;
     border-radius: 10px;
     position: relative;
-    background-position: 0px 0px;
-    background-repeat: repeat-x repeat-y;
-    animation: animatedBackground 40s linear infinite;
+    background: #f0f3fa;
 }
 
 .who-title {
@@ -35,7 +33,7 @@ body {
     height: 540px;
     // border: 5px solid yellow;
     overflow: auto;
-    // background: #f0f3fa;
+    background: #f0f3fa;
 }
 
 #msg {
@@ -173,4 +171,7 @@ body {
     border-top: 10px solid #3176af;
     border-right: 10px solid #fff;
     border-bottom: 0px solid #fff;
+}
+.emoji_icon{
+    vertical-align: middle;
 }

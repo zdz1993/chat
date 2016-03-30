@@ -6,43 +6,39 @@
      var oForm = document.getElementById("form");
      var oWhoEnter = document.getElementsByClassName("who-enter")[0];
      var oWhoTitle = document.getElementsByClassName("who-title")[0];
-     $('#form').css("background-image", "url('../img/hyt1.jpeg')")
+
+
+     $("#msg").emoji({
+         button: "#btn",
+         showTab: false,
+         animation: 'slide',
+         icons: [{
+             name: "QQ表情",
+             path: "../img/qq/",
+             maxNum: 91,
+             excludeNums: [41, 45, 54],
+             file: ".gif"
+         }]
+     });
+
+
      if (nickname) {
-
-         //更改北京图片
-         var imgArrayNum = 0;
-         setInterval(function() {
-             if (imgArrayNum > 15) {
-                 imgArrayNum = 0;
-             } else {
-                 imgArrayNum = imgArrayNum + 1;
-                 $('#form').css("background-image", "url('../img/hyt" + imgArrayNum + ".jpeg')");
-             }
-
-         }, 10000);
-         //添加表情
-         $('.expression').on('click', '.express-extent', function(e) {
-
-             var target = e.target;
-             var src = target.src;
-             var html = '<img width="30px" height="30px" style="vertical-align: middle" src=' + src + '>'
-             $('#msg').append(html);
-
-         })
-
          oWhoTitle.innerHTML = nickname;
          connection = new WebSocket("ws://120.76.129.15:8080")
          connection.onopen = function() {
              connection.send(nickname)
              oForm.onsubmit = function(event) {
-                 if (oMsg.innerHTML)
+                 if (oMsg.innerHTML) {
                      connection.send(oMsg.innerHTML)
+                 }
+
                  oMsg.innerHTML = ""
                  event.preventDefault()
              }
              oMsg.onkeydown = function(event) {
 
                  if (event.keyCode == 13) {
+
                      connection.send(oMsg.innerHTML);
                      oMsg.innerHTML = "";
                      event.preventDefault()
