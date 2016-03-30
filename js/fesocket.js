@@ -46,15 +46,15 @@
              }
 
          }
-         connection.onclose = function(nick) {
-             var oDom = document.getElementsByClassName("enter-title-h");
-             for (var i = 0; i < oDom.length; i++) {
-                 if (oDom[i].textContent == nick) {
-                     oWhoEnter.removeChild(oDom[i])
-                 }
-             }
+         // connection.onclose = function(nick) {
+         //     var oDom = document.getElementsByClassName("enter-title-h");
+         //     for (var i = 0; i < oDom.length; i++) {
+         //         if (oDom[i].textContent == nick) {
+         //             oWhoEnter.removeChild(oDom[i])
+         //         }
+         //     }
 
-         }
+         // }
          connection.onerror = function() {
              console.error("Connection error");
          }
@@ -72,11 +72,12 @@
              } else {
                  var oDom = document.getElementsByClassName("enter-title-h");
                  var oChild = document.getElementsByClassName("who-enter")[0];
-                 for (var i = 0; i < oDom.length; i++) {
-                     oChild.removeChild(oDom[i])
-                 }
-
-                 data.str.map(function(item, index) {
+                 // for (var i = 0; i < oDom.length; i++) {
+                 //     oChild.removeChild(oDom[i])
+                 // }
+                 oChild.innerHTML = "<div class='enter-title'>在线详情</div>";
+                 console.log(data.str);
+                 data.str && data.str.map(function(item, index) {
                      var odiv = document.createElement("div");
                      odiv.className = 'enter-title-h';
                      odiv.textContent = item + '在线';
